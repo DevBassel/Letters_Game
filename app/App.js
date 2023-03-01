@@ -35,7 +35,7 @@ function render() {
   current.forEach((item) => {
     html += `
     <div class="word" style="top: ${item.top}px; left: ${item.left}px">  
-      <img src="../assets/icon.png" alt="icon"/>  
+      <img src="../icon.png" alt="icon"/>  
       <span class="ltr">${item.ltr} </span>
       </div>`;
   });

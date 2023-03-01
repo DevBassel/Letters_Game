@@ -16,7 +16,7 @@ body {
   justify-content: center;
 }
 .game {
-  background: url(../assets/bg.jpg);
+  background: url(../bg.jpg);
   background-size: cover;
   height: 550px;
   width: 700px;
