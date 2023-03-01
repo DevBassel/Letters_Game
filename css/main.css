@@ -39,6 +39,8 @@ body {
   height: 45px;
   width: 90px;
   border-radius: 6px;
+  background: url(../icon.png);
+  background-size: cover;
   left: 10px;
 }
 .word .ltr {
