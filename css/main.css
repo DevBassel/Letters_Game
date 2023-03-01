@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+:root {
+  --top: 100%;
+  --left: 50%;
+}
+body {
+  background: #222831;
+  height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.game {
+  background: url(../assets/bg.jpg);
+  background-size: cover;
+  height: 550px;
+  width: 700px;
+  border: 1px solid #eeeeee;
+  border-radius: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-borde::after {
+  content: "";
+  position: absolute;
+  top: 500px;
+  border-top: 3px dashed #00adb5;
+  width: 100%;
+}
+.word {
+  position: absolute;
+  background-size: cover;
+  height: 45px;
+  width: 90px;
+  border-radius: 6px;
+  left: 10px;
+}
+.word .ltr {
+  position: absolute;
+  z-index: 10;
+  border: 1px solid #fff;
+  height: 22px;
+  width: 38px;
+  left: 50%;
+  top: 34px;
+  transform: translateX(-50%);
+  border-radius: 1rem;
+  color: #00adb5;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+.word img {
+  width: 100%;
+}
+.control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.5);
+}
+.control button,
+.gameOver .content button {
+  border: 1px solid #00adb5;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 30px;
+  color: #00adb5;
+  background: #222831;
+  font-weight: bold;
+  letter-spacing: 5px;
+
+  cursor: pointer;
+}
+.control button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.gameOver .content button {
+  margin-top: 20px;
+}
+.lives,
+.score {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-weight: bold;
+  color: #00adb5;
+}
+.score {
+  left: 10px;
+  font-size: 14px;
+}
+
+.gameOver {
+  position: absolute;
+  z-index: 99;
+  color: #00adb5;
+  height: 100%;
+  width: 100%;
+  display: block;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+}
+.gameOver .content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  line-height: 2;
+}
+.gameOver .content h1 {
+  font-size: 65px;
+}
