@@ -5,12 +5,14 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 :root {
-  --top: 100%;
+  --text: #00adb5;
+  --he: 30px;
   --left: 50%;
+  --sc: #fac900;
 }
 body {
   background: #222831;
-  height: 95vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,67 +20,136 @@ body {
 .game {
   background: url(../bg.jpg);
   background-size: cover;
-  height: 550px;
-  width: 700px;
+  /* height: 550px;
+  width: 750px; */
+  height: 96vh;
+  width: 100vw;
   border: 1px solid #eeeeee;
   border-radius: 0.5rem;
   position: relative;
   overflow: hidden;
 }
 
+.game .area {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.borde {
+  height: 100%;
+}
 .game-borde::after {
   content: "";
   position: absolute;
-  top: 500px;
-  border-top: 3px dashed #00adb5;
+  top: 90%;
+  border-top: 3px dashed var(--text);
   width: 100%;
+}
+.bullt-area {
+  height: 80px;
+  width: 35px;
+  /* background: red; */
+  position: absolute;
+  bottom: 0;
+  left: 50.6%;
+  transform: translateX(-50%);
+  transition: all 0.3s linear;
+}
+.cannon-body {
+  content: "";
+  position: absolute;
+  height: 85px;
+  width: 75px;
+  background: url(../rocket.svg) no-repeat;
+  background-size: cover;
+  bottom: 0;
+  left: 50%;
+  transform:  translateX(-50%);
+}
+.fire{
+  animation: can .2s ease-in-out;
+}
+@keyframes can {
+  from{
+    bottom: 0;
+  }
+  to{
+    bottom: -10px;
+  }
+}
+.bullt {
+  padding: 5px;
+  background: red;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2rem;
 }
 .word {
   position: absolute;
-  background-size: cover;
-  height: 45px;
-  width: 90px;
+  height: 50px;
+  width: 80px;
   border-radius: 6px;
   background: url(../icon.png);
-  background-size: cover;
+  background-size: 100%;
   left: 10px;
 }
-.word .ltr {
+.wordR {
+  position: absolute;
+  height: 95px;
+  width: 60px;
+  border-radius: 6px;
+  background: url(../icon2.png);
+  background-size: 243px;
+  left: 10px;
+  border: 1px solid #fff;
+  z-index: 999;
+  background-position: 50%;
+}
+
+.word .ltr,
+.wordR .ltr {
   position: absolute;
   z-index: 10;
   border: 1px solid #fff;
-  height: 22px;
-  width: 38px;
+  height: 30px;
+  width: 30px;
   left: 50%;
   top: 34px;
+  font-size: 20px;
   transform: translateX(-50%);
   border-radius: 1rem;
-  color: #00adb5;
+  color: var(--sc);
   font-weight: bold;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
 }
-.word img {
-  width: 100%;
+.wordR .ltr {
+  height: 25px;
+  width: 25px;
+  left: 50%;
+  top: 46px;
 }
+
 .control {
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 99;
   background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .control button,
 .gameOver .content button {
-  border: 1px solid #00adb5;
+  border: 1px solid var(--text);
   border-radius: 10px;
   padding: 10px 20px;
   font-size: 30px;
-  color: #00adb5;
+  color: var(--text);
   background: #222831;
   font-weight: bold;
   letter-spacing: 5px;
@@ -86,10 +157,7 @@ body {
   cursor: pointer;
 }
 .control button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  height: fit-content;
 }
 .gameOver .content button {
   margin-top: 20px;
@@ -100,7 +168,7 @@ body {
   top: 5px;
   right: 10px;
   font-weight: bold;
-  color: #00adb5;
+  color: var(--text);
 }
 .score {
   left: 10px;
@@ -110,7 +178,7 @@ body {
 .gameOver {
   position: absolute;
   z-index: 99;
-  color: #00adb5;
+  color: var(--text);
   height: 100%;
   width: 100%;
   display: block;
