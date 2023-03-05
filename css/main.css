@@ -18,12 +18,12 @@ body {
   justify-content: center;
 }
 .game {
-  background: url(../bg.jpg);
+  background: url(../assets/img/bg.jpg);
   background-size: cover;
   /* height: 550px;
   width: 750px; */
   height: 96vh;
-  width: 100vw;
+  width: 97vw;
   border: 1px solid #eeeeee;
   border-radius: 0.5rem;
   position: relative;
@@ -60,20 +60,20 @@ body {
   position: absolute;
   height: 85px;
   width: 75px;
-  background: url(../rocket.svg) no-repeat;
+  background: url(../assets/img/rocket.svg) no-repeat;
   background-size: cover;
   bottom: 0;
   left: 50%;
-  transform:  translateX(-50%);
+  transform: translateX(-50%);
 }
-.fire{
-  animation: can .2s ease-in-out;
+.fire {
+  animation: can 0.2s ease-in-out;
 }
 @keyframes can {
-  from{
+  from {
     bottom: 0;
   }
-  to{
+  to {
     bottom: -10px;
   }
 }
@@ -90,7 +90,7 @@ body {
   height: 50px;
   width: 80px;
   border-radius: 6px;
-  background: url(../icon.png);
+  background: url(../assets/img/icon.png);
   background-size: 100%;
   left: 10px;
 }
@@ -99,7 +99,7 @@ body {
   height: 95px;
   width: 60px;
   border-radius: 6px;
-  background: url(../icon2.png);
+  background: url(../assets/imgicon2.png);
   background-size: 243px;
   left: 10px;
   border: 1px solid #fff;
@@ -167,8 +167,15 @@ body {
   position: absolute;
   top: 5px;
   right: 10px;
-  font-weight: bold;
   color: var(--text);
+}
+.lives span,
+.score span {
+  color: var(--sc);
+  font-size: 1.3em;
+}
+.lives {
+  right: 10px;
 }
 .score {
   left: 10px;
@@ -195,4 +202,27 @@ body {
 }
 .gameOver .content h1 {
   font-size: 65px;
+}
+.mute {
+  position: absolute;
+  top: 40px;
+  display: block;
+  color: var(--sc);
+  font-weight: bolder;
+  padding: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  left: 5px;
+  height: 40px;
+  width: 40px;
+  background:  url(../assets/img/unmute.svg) no-repeat;
+  background-size: cover;
+
+}
+
+.mute.enable{
+  background-image: url(../assets/img/unmute.svg);
+}
+.mute.disable{
+  background-image: url(../assets/img/mute.svg);
 }

@@ -1,48 +1,54 @@
+// -----------------------------------------------------------
+// DOM elements
+// -----------------------------------------------------------
 let startBtns = document.querySelectorAll(".control button");
 let borde = document.querySelector(".game-borde");
-let ltrs_en = "abcdefghijklmnopqrstuvwxyz".split("");
-let ltrs_ar = [
-  "ا",
-  "ب",
-  "ت",
-  "ث",
-  "ج",
-  "ح",
-  "خ",
-  "د",
-  "ذ",
-  "ر",
-  "ص",
-  "ض",
-  "ط",
-  "ظ",
-  "ع",
-  "غ",
-  "ف",
-  "ق",
-  "ل",
-  "م",
-  "ن",
-  "و",
-  "ه",
-  "ي",
-];
 let livesEl = document.querySelector(".lives");
 let scoreArea = document.querySelector(".score span");
+let muteEl = document.querySelector(".mute");
+// -----------------------------------------------------------
+// Array of leeters
+// -----------------------------------------------------------
+let ltrs_en = "abcdefghijklmnopqrstuvwxyz".split("");
+let ltrs_ar = "ابتثجحخدذرصضطظعغفقلمنوهي".split("");
+// -----------------------------------------------------------
+// Global vars
+// -----------------------------------------------------------
 let current = [];
 let lives = 3;
-let genTime = 1300;
 let score = 0;
-let speed = 110;
 let speedCount = 0;
+let genTime = 1300;
+let speed = 110;
 let dropInterval;
 let gen;
+let mute = false;
+// -----------------------------------------------------------
+// mute All sounds
+muteEl.addEventListener("click", () => {
+  mute = !mute;
+  if (mute) {
+    muteEl.className = "mute disable";
+  } else muteEl.className = "mute enable";
+  // console.log(mute);
+});
+// -----------------------------------------------------------
 
+// Create a sound effect and play it
+let soundEffect = (src, close) => {
+  if (!mute) {
+    let sound = new Audio(src);
+    sound.play();
+    setTimeout(() => sound.pause(), close || 2000);
+  } else console.log("sound is mute");
+};
+// -----------------------------------------------------------
+// statr Btn an select lang
 startBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     let Add;
     document.querySelector(".control").remove();
-    console.log(btn.className);
+    // console.log(btn.className);
     if (btn.className === "start_En") {
       Add = setInterval(() => generat(ltrs_en), genTime);
     } else {
@@ -51,49 +57,33 @@ startBtns.forEach((btn) => {
     dropFun(Add);
   });
 });
-
-window.addEventListener("keydown", ({ key }) => {
-  let don = false;
-  let it = "";
-  current.forEach((item) => {
-    if (item.ltr === key) {
-      it = item;
-      don = true;
-      score += 10;
-      speedCount += 10;
-      scoreArea.textContent = score;
-      render();
-    }
-  });
-  if (it) {
-    fire(it);
-    setTimeout(() => (current = current.filter((el) => el.id !== it.id)), 330);
-  }
-  if (!don) {
-    lives -= 1;
-  }
-});
-
+// -----------------------------------------------------------
+// keyborde event and check key
+window.addEventListener("keydown", ({ key }) => onKeyDown(key));
+// -----------------------------------------------------------
+// reload page to reset all
 document.querySelector(".restart").addEventListener("click", () => {
   window.location.reload();
 });
 
-// function randLtr(arr) {}
+// functions
+// -------------------------------------------------------------------
 function generat(arr) {
   clearInterval(gen);
-  let l = arr[Math.floor(Math.random() * arr.length)];
+  if (arr.length) {
+    let l = arr[Math.floor(Math.random() * arr.length)];
 
-  current = [
-    ...current,
-    {
-      id: Date.now().toString(32),
-      ltr: l,
-      left: Math.floor(Math.random() * (borde.offsetWidth - 80)),
-      top: 0,
-    },
-  ];
-
-  gen = setInterval(() => generat(), genTime);
+    current = [
+      ...current,
+      {
+        id: Date.now().toString(32),
+        ltr: l,
+        left: Math.floor(Math.random() * (borde.offsetWidth - 80)),
+        top: 0,
+      },
+    ];
+  }
+  gen = setInterval(() => generat(arr), genTime);
 }
 function render() {
   livesEl.textContent = lives;
@@ -109,6 +99,7 @@ function render() {
   borde.innerHTML = html;
 }
 function gameOver(A, D) {
+  soundEffect("../assets/sound/gameOver.wav");
   if (window.localStorage.HeightScore) {
     if (score > window.localStorage.HeightScore) {
       window.localStorage.HeightScore = score;
@@ -139,25 +130,28 @@ function dropFun(Add) {
 
   current.forEach((el) => {
     if (el.top === borde.parentElement.offsetHeight - 100) {
-      lives -= 1;
-      livesEl.textContent = lives;
+      lose();
     }
   });
-  console.log("speed", speed, "count", speedCount);
+  console.log("speed: ", speed, "count: ", speedCount, "genSpeed: ", genTime);
 
-  if (speedCount >= 50) {
+  if (speedCount >= 100) {
     speedCount = 0;
 
     if (speed > 10) {
       speed -= 5;
-      genTime -= 100;
+      genTime -= 50;
     }
   }
   if (lives === 0) {
     gameOver(Add, dropInterval);
   } else dropInterval = setInterval(dropFun, speed);
 }
-
+function lose() {
+  lives -= 1;
+  livesEl.textContent = lives;
+  soundEffect("../assets/sound/lose.wav");
+}
 function fire(el) {
   let cannon = document.querySelector(".cannon-body");
 
@@ -169,9 +163,10 @@ function fire(el) {
   bullt.style.setProperty("left", `${el.left + 40}px`);
   let span = document.createElement("span");
   span.className = "bullt";
-
+  soundEffect("../assets/sound/bullt.wav", 300);
   bullt.appendChild(span);
   cannon.classList.add("fire");
+
   setTimeout(() => {
     bullt.style.setProperty("height", `${35}px`);
     bullt.style.setProperty("left", `${50}%`);
@@ -181,3 +176,30 @@ function fire(el) {
 
   console.log(el.left);
 }
+function onKeyDown(key) {
+  let don = false;
+  let it = "";
+  if (lives > 0) {
+    current.forEach((item) => {
+      if (item.ltr === key) {
+        it = item;
+        don = true;
+        score += 10;
+        speedCount += 10;
+        scoreArea.textContent = score;
+        render();
+      }
+    });
+    if (it) {
+      fire(it);
+      setTimeout(
+        () => (current = current.filter((el) => el.id !== it.id)),
+        330
+      );
+    }
+    if (!don) {
+      lose();
+    }
+  }
+}
+// ------------------------------------------------------------------------
