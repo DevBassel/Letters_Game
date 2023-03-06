@@ -17,6 +17,64 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #222831;
+  color: #fac900;
+  z-index: 9999;
+}
+.loading {
+  display: none;
+}
+.loading.active {
+  display: block;
+}
+.svg-loader {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.loader-svg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  fill: none;
+  stroke-width: 5px;
+  stroke-linecap: round;
+  stroke: var(--text);
+}
+.loader-svg.bg {
+  stroke-width: 8px;
+  stroke: rgb(207, 205, 245);
+}
+.animate {
+  stroke-dasharray: 242.6;
+  animation: fill-animation 1s cubic-bezier(1, 1, 1, 1) 0s infinite;
+}
+
+@keyframes fill-animation {
+  0% {
+    stroke-dasharray: 40 242.6;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 141.3;
+    stroke-dashoffset: 141.3;
+  }
+  100% {
+    stroke-dasharray: 40 242.6;
+    stroke-dashoffset: 282.6;
+  }
+}
 .game {
   background: url(../assets/img/bg.jpg);
   background-size: cover;
@@ -215,14 +273,13 @@ body {
   left: 5px;
   height: 40px;
   width: 40px;
-  background:  url(../assets/img/unmute.svg) no-repeat;
+  background: url(../assets/img/unmute.svg) no-repeat;
   background-size: cover;
-
 }
 
-.mute.enable{
+.mute.enable {
   background-image: url(../assets/img/unmute.svg);
 }
-.mute.disable{
+.mute.disable {
   background-image: url(../assets/img/mute.svg);
 }

@@ -4,11 +4,25 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="./assets/img/icon.png">
+    <link rel="icon" type="image/x-icon" href="./assets/img/icon.png" />
     <title>Words Game</title>
     <link rel="stylesheet" href="./css/main.css" />
   </head>
   <body>
+    <div class="loading active">
+      <div class="svg-loader">
+        <svg
+          class="svg-container"
+          height="300"
+          width="300"
+          viewBox="0 0 100 100"
+        >
+          <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+          <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+        </svg>
+      </div>
+    </div>
+
     <div class="game">
       <!-- Game Borde -->
       <div class="game-borde"></div>
@@ -29,8 +43,7 @@
             <button class="restart">Restart</button>
           </div>
         </div>
-    <span class="mute"></span>
-
+        <span class="mute"></span>
       </div>
       <div class="bullt-area">
         <!-- <span class="bullt"></span> -->

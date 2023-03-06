@@ -6,6 +6,7 @@ let borde = document.querySelector(".game-borde");
 let livesEl = document.querySelector(".lives");
 let scoreArea = document.querySelector(".score span");
 let muteEl = document.querySelector(".mute");
+let loading = document.querySelector(".loading");
 // -----------------------------------------------------------
 // Array of leeters
 // -----------------------------------------------------------
@@ -39,10 +40,19 @@ let soundEffect = async (src, close) => {
   if (!mute) {
     let sound = new Audio(src);
     await sound.play();
-
     setTimeout(() => sound.pause(), close || 2000);
   } else console.log("sound is mute");
 };
+
+document.onreadystatechange = function () {
+  if (document.readyState === "complete") {
+    loading.classList.remove("active")
+  } else {
+    loading.classList.add("active")
+    console.log("done");
+  }
+};
+
 // -----------------------------------------------------------
 // statr Btn an select lang
 startBtns.forEach((btn) => {
@@ -100,7 +110,7 @@ function render() {
   borde.innerHTML = html;
 }
 function gameOver(A, D) {
-  soundEffect("../assets/sound/gameOver.wav");
+  soundEffect("../assets/sound/gameOver.mp3");
   if (window.localStorage.HeightScore) {
     if (score > window.localStorage.HeightScore) {
       window.localStorage.HeightScore = score;
@@ -151,7 +161,7 @@ function dropFun(Add) {
 function lose() {
   lives -= 1;
   livesEl.textContent = lives;
-  soundEffect("../assets/sound/lose.wav");
+  soundEffect("../assets/sound/lose.mp3");
 }
 function fire(el) {
   let cannon = document.querySelector(".cannon-body");
@@ -164,7 +174,7 @@ function fire(el) {
   bullt.style.setProperty("left", `${el.left + 40}px`);
   let span = document.createElement("span");
   span.className = "bullt";
-  soundEffect("../assets/sound/bullt.wav", 300);
+  soundEffect("../assets/sound/bullt.mp3", 300);
   bullt.appendChild(span);
   cannon.classList.add("fire");
 
