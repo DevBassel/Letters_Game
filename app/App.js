@@ -46,9 +46,9 @@ let soundEffect = async (src, close) => {
 
 document.onreadystatechange = function () {
   if (document.readyState === "complete") {
-    loading.classList.remove("active")
+    loading.classList.remove("active");
   } else {
-    loading.classList.add("active")
+    loading.classList.add("active");
     console.log("done");
   }
 };
@@ -163,7 +163,9 @@ function lose() {
   livesEl.textContent = lives;
   soundEffect("../assets/sound/lose.mp3");
 }
+let b;
 function fire(el) {
+  clearTimeout(b);
   let cannon = document.querySelector(".cannon-body");
 
   let bullt = document.createElement("span");
@@ -178,7 +180,7 @@ function fire(el) {
   bullt.appendChild(span);
   cannon.classList.add("fire");
 
-  setTimeout(() => {
+  b = setTimeout(() => {
     bullt.style.setProperty("height", `${35}px`);
     bullt.style.setProperty("left", `${50}%`);
     bullt.remove();
