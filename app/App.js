@@ -35,10 +35,11 @@ muteEl.addEventListener("click", () => {
 // -----------------------------------------------------------
 
 // Create a sound effect and play it
-let soundEffect = (src, close) => {
+let soundEffect = async (src, close) => {
   if (!mute) {
     let sound = new Audio(src);
-    sound.play();
+    await sound.play();
+
     setTimeout(() => sound.pause(), close || 2000);
   } else console.log("sound is mute");
 };
