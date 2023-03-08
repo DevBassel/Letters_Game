@@ -80,14 +80,33 @@ body {
   background-size: cover;
   /* height: 550px;
   width: 750px; */
-  height: 96vh;
-  width: 97vw;
-  border: 1px solid #eeeeee;
+  height: 98vh;
+  width: 98vw;
+  border: 1px solid var(--sc);
   border-radius: 0.5rem;
   position: relative;
   overflow: hidden;
 }
-
+.round {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:  translate(-50%,-50%) scale(0);
+  transition: all .2s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.round.active {
+  transform:  translate(-50%,-50%) scale(1);
+}
+.round.active h1{
+  font-size: 50px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 1rem;
+  padding: 10px;
+  color: #fac800;
+}
 .game .area {
   position: absolute;
   height: 100%;
@@ -100,7 +119,7 @@ body {
   content: "";
   position: absolute;
   top: 90%;
-  border-top: 3px dashed var(--text);
+  border-top: 3px dotted darkred;
   width: 100%;
 }
 .bullt-area {
@@ -123,6 +142,11 @@ body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+}
+.rocet{
+  height: 100px;
+  width: 71px;
+
 }
 .fire {
   animation: can 0.2s ease-in-out;
@@ -220,17 +244,18 @@ body {
 .gameOver .content button {
   margin-top: 20px;
 }
-.lives,
-.score {
+.data {
   position: absolute;
-  top: 5px;
-  right: 10px;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  top: 10px;
   color: var(--text);
 }
-.lives span,
-.score span {
+.data span {
   color: var(--sc);
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 .lives {
   right: 10px;
@@ -282,4 +307,15 @@ body {
 }
 .mute.disable {
   background-image: url(../assets/img/mute.svg);
+}
+
+.me a{
+  color: var(--sc);
+  background: linear-gradient(
+    168deg,
+    hsl(192, 100%, 67%) 0%,
+    hsl(280, 87%, 65%) 91%
+  );  padding: 5px 10px;
+  border-radius: 2rem;
+  font-weight: bold;
 }
