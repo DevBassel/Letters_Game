@@ -2,16 +2,15 @@
 // -------------------------------------------------------------------
 function roundFun() {
   let container = document.querySelector(".round");
-  document.querySelector(".r span").textContent = round;
   if (roundCount >= 500) {
+    round += 1;
+    rocets += 1;
     let txt = `Round: ${round}`;
     let count = 0;
-
     container.querySelector("h1").textContent = "";
 
     roundCount = 0;
-    round += 1;
-    rocets+=1;
+
     container.classList.add("active");
     let type = setInterval(() => {
       container.querySelector("h1").textContent += txt[count];
@@ -25,6 +24,7 @@ function roundFun() {
       clearTimeout(to);
     }, 3500);
   }
+  document.querySelector(".r span").textContent = round;
 }
 // -------------------------------------------------------------------
 // Create a sound effect and play it
@@ -57,7 +57,7 @@ function generat(arr) {
 function render() {
   livesEl.textContent = lives;
   scoreArea.textContent = score;
-document.querySelector(".data .rocets span").textContent= rocets;
+  document.querySelector(".data .rocets span").textContent = rocets;
   let html = "";
   current.forEach((item) => {
     html += `
